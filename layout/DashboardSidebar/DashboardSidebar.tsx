@@ -64,7 +64,6 @@ function DashboardSidebar() {
 
       {/* 3. User / Profile Section */}
       <div className="p-4 border-t border-border bg-background/50">
-        <Button variant="contained" color="primary" className="w-full" onClick={handleLogout}>Logout</Button>
         <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-background transition-colors cursor-pointer text-left">
           <div className="w-10 h-10 rounded-full bg-secondary/20 border border-border flex items-center justify-center text-foreground font-bold">
             JD

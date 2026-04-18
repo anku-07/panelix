@@ -5,6 +5,7 @@ import ManIcon from "@/ui/icons/ManIcon";
 import NotificationIcon from "@/ui/icons/NotificationIcon";
 import { logout } from "@/utils/auth";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface DashboardHeaderProps {
   title: string;
@@ -13,10 +14,9 @@ interface DashboardHeaderProps {
 function DashboardHeader({ title }: DashboardHeaderProps) {
 
   const router = useRouter();
-
-
   const handleLogout = () => {
     logout();
+    toast.success("Logout successful!");
     router.push("/auth/login")
   }
 
