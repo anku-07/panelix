@@ -6,7 +6,7 @@ import SignUp from "./auth/signup/page";
 function Home() {
   return (
     <div>
-      <SignUp />
+      <Dashboard />
     </div>
   );
 }
