@@ -25,13 +25,6 @@ function AuthWrapper({ children, title, subtitle }: IAuthWrapperProps) {
         {/* Content Section (Where your forms go) */}
         <div className="px-8 pb-8 font-body">{children}</div>
 
-        {/* Footer Section */}
-        <div className="bg-background/30 border-t border-border px-8 py-4 text-center">
-          <p className="text-xs text-secondary italic">
-            &copy; {new Date().getFullYear()} Your Project Name. All rights
-            reserved.
-          </p>
-        </div>
       </div>
 
       {/* Back to Home Link (Optional) */}
