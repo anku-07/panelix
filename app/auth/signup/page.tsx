@@ -5,6 +5,7 @@ import { TUser } from "@/typescript/common.types";
 import Button from "@/ui/Button/Button";
 import CommonInput from "@/ui/CommonInput/CommonInput";
 import { getUsers, saveUsers } from "@/utils/auth";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -78,6 +79,17 @@ function SignUp() {
           >
             Submit
           </Button>
+        </div>
+        <div className="mt-6 text-center">
+          <p className="font-body text-sm text-secondary">
+            Already have an account?{" "}
+            <Link
+              href="/auth/login"
+              className="font-semibold text-primary hover:underline"
+            >
+              Login
+            </Link>
+          </p>
         </div>
       </AuthWrapper>
     </div>

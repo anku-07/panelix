@@ -24,13 +24,10 @@ function AuthWrapper({ children, title, subtitle }: IAuthWrapperProps) {
 
         {/* Content Section (Where your forms go) */}
         <div className="px-8 pb-8 font-body">{children}</div>
+        
 
       </div>
 
-      {/* Back to Home Link (Optional) */}
-      <button className="mt-6 text-secondary hover:text-primary transition-colors text-sm font-body">
-        &larr; Back to home
-      </button>
     </div>
   );
 }

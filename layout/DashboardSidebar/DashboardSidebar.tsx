@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/ui/Button/Button";
-import { logout } from "@/utils/auth";
+import { getCurrentUser, logout } from "@/utils/auth";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
@@ -19,11 +19,8 @@ function DashboardSidebar() {
 
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    toast.success("Logout successful!");
-    router.push("/auth/login");
-  };
+  const user = getCurrentUser();
+
 
   return (
     <aside className="h-screen w-64 bg-surface border-r border-border flex flex-col transition-all duration-300">
@@ -66,14 +63,14 @@ function DashboardSidebar() {
       <div className="p-4 border-t border-border bg-background/50">
         <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-background transition-colors cursor-pointer text-left">
           <div className="w-10 h-10 rounded-full bg-secondary/20 border border-border flex items-center justify-center text-foreground font-bold">
-            JD
+            {user?.userName?.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="font-body text-sm font-semibold text-foreground truncate">
-              John Doe
+              {user?.userName}
             </p>
             <p className="font-body text-xs text-secondary truncate">
-              pro_dev@example.com
+              {user?.email}
             </p>
           </div>
         </div>
