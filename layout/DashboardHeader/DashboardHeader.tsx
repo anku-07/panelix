@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import CommonInput from "@/ui/CommonInput/CommonInput";
 import ManIcon from "@/ui/icons/ManIcon";
 import NotificationIcon from "@/ui/icons/NotificationIcon";
@@ -12,13 +17,12 @@ interface DashboardHeaderProps {
 }
 
 function DashboardHeader({ title }: DashboardHeaderProps) {
-
   const router = useRouter();
   const handleLogout = () => {
     logout();
     toast.success("Logout successful!");
-    router.push("/auth/login")
-  }
+    router.push("/auth/login");
+  };
 
   return (
     <header className="sticky top-0 z-10 w-full bg-background/80 backdrop-blur-md border-b border-border px-8 py-4">
@@ -30,18 +34,19 @@ function DashboardHeader({ title }: DashboardHeaderProps) {
           </h2>
         </div>
 
-
         {/* 3. Action Icons */}
         <div className="flex items-center gap-3">
           {/* Notification Button */}
-          <button className="p-2.5 w-[45px] h-[45px] rounded-xl bg-surface border border-border text-secondary hover:text-primary hover:border-primary transition-all relative">
+          <Button className="p-2.5 w-[45px] h-[45px] rounded-xl bg-surface border border-border text-secondary hover:text-primary hover:border-primary transition-all relative">
             <NotificationIcon />
             <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full border-2 border-surface"></span>
-          </button>
+          </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="p-2.5m w-[45px] h-[45px] rounded-xl bg-surface border border-border text-secondary hover:text-primary hover:border-primary transition-all"><ManIcon /></Button>
+              <Button className="p-2.5m w-[45px] h-[45px] rounded-xl bg-surface border border-border text-secondary hover:text-primary hover:border-primary transition-all">
+                <ManIcon />
+              </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
