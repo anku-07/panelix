@@ -16,7 +16,7 @@ function Button({
 }: ButtonProps) {
   // Base styles for all buttons
   const baseStyles =
-    "px-6 py-2.5 rounded-xl font-heading font-medium transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 cusror-pointer";
+    "cursor-pointer  px-6 py-2.5 rounded-xl font-heading font-medium transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2";
 
   // Logic for Variants and Colors
   const styles = {

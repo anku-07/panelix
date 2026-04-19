@@ -4,6 +4,7 @@ import DashboardIcon from "@/ui/icons/SIdebarIcons/DashboardIcon";
 import ProductsIcon from "@/ui/icons/SIdebarIcons/ProductsIcon";
 import { getCurrentUser } from "@/utils/auth";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const commonPath = "/dashboard";
 
@@ -19,14 +20,17 @@ const NAV_ITEMS = [
 ];
 
 function DashboardSidebar() {
+  // const [user, setUser] = useState(() => {
+  //   if (typeof window === "undefined") return null;
+  //   return getCurrentUser();
+  // });
+
   const pathname = usePathname();
 
   const router = useRouter();
 
-  const user = getCurrentUser();
-
   return (
-    <aside className="h-screen w-64 bg-surface border-r border-border flex flex-col transition-all duration-300">
+    <aside className="h-screen w-[255px] bg-surface border-r border-border flex flex-col transition-all duration-300">
       {/* 1. Logo / Brand Section */}
       <div className="p-6">
         <div className="flex items-center gap-3">
@@ -65,7 +69,7 @@ function DashboardSidebar() {
       </nav>
 
       {/* 3. User / Profile Section */}
-      <div className="p-4 border-t border-border bg-background/50">
+      {/* <div className="p-4 border-t border-border bg-background/50">
         <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-background transition-colors cursor-pointer text-left">
           <div className="w-10 h-10 rounded-full bg-secondary/20 border border-border flex items-center justify-center text-foreground font-bold">
             {user?.userName?.charAt(0).toUpperCase()}
@@ -79,7 +83,7 @@ function DashboardSidebar() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 }
