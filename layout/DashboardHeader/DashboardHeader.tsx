@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 interface DashboardHeaderProps {
-  title: string;
+  title?: string;
 }
 
 function DashboardHeader({ title }: DashboardHeaderProps) {

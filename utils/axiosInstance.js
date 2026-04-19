@@ -1,7 +1,7 @@
-const { default: axios } = require("axios");
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL:"http://localhost:3000"
-})
+  baseURL: "https://dummyjson.com",
+});
 
-export default axiosInstance
+export default axiosInstance;

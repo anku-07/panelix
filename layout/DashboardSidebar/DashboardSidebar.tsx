@@ -1,17 +1,21 @@
 "use client";
 
-import Button from "@/ui/Button/Button";
-import { getCurrentUser, logout } from "@/utils/auth";
+import DashboardIcon from "@/ui/icons/SIdebarIcons/DashboardIcon";
+import ProductsIcon from "@/ui/icons/SIdebarIcons/ProductsIcon";
+import { getCurrentUser } from "@/utils/auth";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
-import toast from "react-hot-toast";
 
-// Example Nav Items - You can move this to a separate config file later
+const commonPath = "/dashboard";
+
 const NAV_ITEMS = [
-  { label: "Dashboard", icon: "📊", path: "/" },
-  { label: "Projects", icon: "📁", path: "/projects" },
-  { label: "Tasks", icon: "✅", path: "/tasks" },
-  { label: "Settings", icon: "⚙️", path: "/settings" },
+  {
+    label: "Dashboard",
+    icon: <DashboardIcon />,
+    path: `${commonPath}`,
+  },
+  { label: "Products", icon: <ProductsIcon />, path: `${commonPath}/products` },
+  { label: "Tasks", icon: "✅", path: `${commonPath}/#url` },
+  { label: "Settings", icon: "⚙️", path: `${commonPath}/#url` },
 ];
 
 function DashboardSidebar() {
@@ -20,7 +24,6 @@ function DashboardSidebar() {
   const router = useRouter();
 
   const user = getCurrentUser();
-
 
   return (
     <aside className="h-screen w-64 bg-surface border-r border-border flex flex-col transition-all duration-300">
@@ -44,11 +47,13 @@ function DashboardSidebar() {
           return (
             <button
               key={item.label}
+              onClick={() => router.push(item.path)}
               className={`
-                w-full flex items-center gap-3 px-4 py-3 rounded-xl font-body text-sm font-medium transition-all
-                ${isActive
-                  ? "bg-primary text-white shadow-lg shadow-primary/20"
-                  : "text-secondary hover:bg-background hover:text-foreground"
+                w-full flex items-center gap-3 px-4 py-3 rounded-xl font-body text-sm font-medium transition-all cursor-pointer
+                ${
+                  isActive
+                    ? "bg-primary text-white shadow-lg shadow-primary/20"
+                    : "text-secondary hover:bg-background hover:text-foreground"
                 }
               `}
             >
