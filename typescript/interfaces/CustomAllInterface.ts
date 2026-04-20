@@ -12,6 +12,7 @@ export interface IProductCardProps {
   imageUrl: string;
   badgeText?: string;
   className?: string;
+  onAddtoCart?: () => void;
 }
 
 export interface IProduct {

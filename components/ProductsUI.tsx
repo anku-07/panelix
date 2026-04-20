@@ -129,6 +129,27 @@ const ProductsUI = () => {
             title={item.title}
             description={item.description}
             price={item.price}
+            onAddtoCart={() => {
+              const existingCart = JSON.parse(
+                localStorage.getItem("cart") || "null",
+              );
+
+              let updatedCart;
+              
+              if (existingCart) {
+                updatedCart = {
+                  ...existingCart,
+                  products: [...existingCart.products, item],
+                };
+              } else {
+                updatedCart = {
+                  id: "anku23@gmail.com",
+                  products: [item],
+                };
+              }
+
+              localStorage.setItem("cart", JSON.stringify(updatedCart));
+            }}
           />
         ))}
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import CartIcon from "@/ui/icons/SIdebarIcons/CartIcon";
 import DashboardIcon from "@/ui/icons/SIdebarIcons/DashboardIcon";
 import ProductsIcon from "@/ui/icons/SIdebarIcons/ProductsIcon";
 import { getCurrentUser } from "@/utils/auth";
@@ -15,8 +16,8 @@ const NAV_ITEMS = [
     path: `${commonPath}`,
   },
   { label: "Products", icon: <ProductsIcon />, path: `${commonPath}/products` },
-  { label: "Tasks", icon: "✅", path: `${commonPath}/#url` },
-  { label: "Settings", icon: "⚙️", path: `${commonPath}/#url` },
+  { label: "Cart", icon: <CartIcon />, path: `${commonPath}/cart` },
+  { label: "Settings", icon: "⚙️", path: `${commonPath}/settings` },
 ];
 
 function DashboardSidebar() {

@@ -9,6 +9,7 @@ const ProductCard = ({
   price,
   category,
   imageUrl,
+  onAddtoCart,
   badgeText,
 }: IProductCardProps) => {
   return (
@@ -17,7 +18,12 @@ const ProductCard = ({
       <div className="relative aspect-square w-full overflow-hidden bg-muted">
         <div className="flex h-full w-full items-center justify-center text-muted-foreground italic">
           {/* Replace with <img /> tag */}
-          <Image src={imageUrl ||  "/fallback.png"} alt="Product Image" width={200} height={200} />
+          <Image
+            src={imageUrl || "/fallback.png"}
+            alt="Product Image"
+            width={200}
+            height={200}
+          />
         </div>
         {/* Accent Badge */}
         <div className="absolute top-3 left-3 rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground shadow-sm">
@@ -47,7 +53,10 @@ const ProductCard = ({
           <span className="font-heading text-2xl font-bold text-foreground">
             ${price}
           </span>
-          <Button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2">
+          <Button
+            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            onClick={() => onAddtoCart?.()}
+          >
             {/* <ShoppingCart size={18} /> */}
             Add to Cart
           </Button>
