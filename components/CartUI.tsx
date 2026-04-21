@@ -135,7 +135,7 @@ function CartUI() {
               </div>
             </div>
 
-            <button className="w-full py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]">
+            <button className="w-full py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]" onClick={() => router.push("/dashboard/checkout")}>
               Checkout Now
             </button>
           </div>
