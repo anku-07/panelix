@@ -3,7 +3,10 @@
 import ProductCard from "./ProductCard/ProductCard";
 import CommonInput from "@/ui/CommonInput/CommonInput";
 
-import { IProduct } from "@/typescript/interfaces/CustomAllInterface";
+import {
+  ICartItem,
+  IProduct,
+} from "@/typescript/interfaces/CustomAllInterface";
 import { useEffect, useState } from "react";
 import FilterIcon from "@/ui/icons/FilterIcon";
 import { Button } from "./ui/button";
@@ -140,10 +143,27 @@ const ProductsUI = () => {
 
               let updatedCart;
 
-              if (existingCart) {
-                updatedCart = {
-                  products: [...existingCart.products, item],
-                };
+              if (existingCart.products) {
+                const productIndex = existingCart.products.findIndex(
+                  (p: ICartItem) => p.id === item.id,
+                );
+
+                if (productIndex > -1) {
+                  existingCart.products[productIndex].quantity += 1;
+
+                  updatedCart = {
+                    ...existingCart,
+                    products: existingCart.products,
+                  };
+                } else {
+                  updatedCart = {
+                    ...existingCart,
+                    products: [
+                      ...existingCart.products,
+                      { ...item, quantity: 1 },
+                    ],
+                  };
+                }
               } else {
                 updatedCart = {
                   id: user?.email,

@@ -1,16 +1,20 @@
 "use client";
 
-import { IProduct } from "@/typescript/interfaces/CustomAllInterface";
+import {
+  ICartItem,
+  IProduct,
+} from "@/typescript/interfaces/CustomAllInterface";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Trash2, ShoppingBag, ArrowLeft } from "lucide-react"; // Optional: npm i lucide-react
+import { useRouter } from "next/navigation";
 
 function CartUI() {
-  const [cart, setCart] = useState<IProduct[]>([]);
+  const router = useRouter();
+  const [cart, setCart] = useState<ICartItem[]>([]);
 
   const removeCartProduct = (id: number) => {
     const cartData = JSON.parse(localStorage.getItem("cart") || "{}");
-
     const updatedCartData = cartData.products.filter(
       (cart: IProduct) => cart.id !== id,
     );
@@ -35,20 +39,31 @@ function CartUI() {
         <p className="text-muted-foreground">
           Looks like you haven t added anything yet.
         </p>
-        <button className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all">
+        <button
+          className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all cursor-pointer"
+          onClick={() => router.push("/dashboard/products")}
+        >
           Continue Shopping
         </button>
       </div>
     );
   }
 
-  const totalPrice = cart.reduce((acc, item) => acc + (item.price || 0), 0);
+  const totalPrice = cart.reduce(
+    (acc, item) => acc + (item.price * item.quantity || 0),
+    0,
+  );
 
   return (
     <div className="">
       <div className="flex items-center gap-2 mb-8 group cursor-pointer w-fit">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-        <span className="text-sm font-medium">Back to Shop</span>
+        <span
+          className="text-sm font-medium  cursor-pointer"
+          onClick={() => router.push("/dashboard/products")}
+        >
+          Back to Shop
+        </span>
       </div>
 
       <h1 className="text-4xl font-bold font-heading mb-8">Shopping Cart</h1>
@@ -78,6 +93,7 @@ function CartUI() {
                   {item.category}
                 </p>
                 <p className="mt-2 font-bold text-primary">${item.price}</p>
+                <p>Qty: {item?.quantity}</p>
               </div>
 
               <button

@@ -23,3 +23,7 @@ export interface IProduct {
   category: string;
   images: string[]; // 👈 API gives array
 }
+
+export interface ICartItem extends IProduct {
+  quantity: number;
+}
