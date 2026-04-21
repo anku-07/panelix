@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard/ProductCard";
 import CommonInput from "@/ui/CommonInput/CommonInput";
 
 import { IProduct } from "@/typescript/interfaces/CustomAllInterface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterIcon from "@/ui/icons/FilterIcon";
 import { Button } from "./ui/button";
 import {
@@ -21,8 +21,12 @@ import { Field, FieldGroup } from "./ui/field";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 import useProduct from "@/hooks/useProduct";
+import { getCurrentUser } from "@/utils/auth";
+import { TUser } from "@/typescript/common.types";
 
 const ProductsUI = () => {
+  const [user] = useState<TUser | null>(() => getCurrentUser());
+
   const { products, loading, error } = useProduct();
   const categoriesList = ["beauty", "fragrances", "furniture", "groceries"];
 
@@ -135,15 +139,14 @@ const ProductsUI = () => {
               );
 
               let updatedCart;
-              
+
               if (existingCart) {
                 updatedCart = {
-                  ...existingCart,
                   products: [...existingCart.products, item],
                 };
               } else {
                 updatedCart = {
-                  id: "anku23@gmail.com",
+                  id: user?.email,
                   products: [item],
                 };
               }
