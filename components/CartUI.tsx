@@ -11,12 +11,18 @@ import { useRouter } from "next/navigation";
 
 function CartUI() {
   const router = useRouter();
-  const [cart, setCart] = useState<ICartItem[]>([]);
+  const [cart, setCart] = useState<ICartItem[]>(() => {
+    if (typeof window === "undefined") return [];
+
+    const data = JSON.parse(localStorage.getItem("cart") || "null");
+    return data?.products || [];
+  });
 
   const removeCartProduct = (id: number) => {
     const cartData = JSON.parse(localStorage.getItem("cart") || "{}");
+    if (!cartData?.products) return;
     const updatedCartData = cartData.products.filter(
-      (cart: IProduct) => cart.id !== id,
+      (cart: ICartItem) => cart.id !== id,
     );
 
     setCart(updatedCartData);
@@ -24,10 +30,10 @@ function CartUI() {
     localStorage.setItem("cart", JSON.stringify({ products: updatedCartData }));
   };
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("cart") || "null");
-    setCart(data?.products || []);
-  }, []);
+  // useEffect(() => {
+  //   const data = JSON.parse(localStorage.getItem("cart") || "null");
+  //   setCart(data?.products || []);
+  // }, []);
 
   if (!cart || cart.length === 0) {
     return (
@@ -71,7 +77,7 @@ function CartUI() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Products List */}
         <div className="lg:col-span-2 space-y-4">
-          {cart.map((item: IProduct) => (
+          {cart.map((item: ICartItem) => (
             <div
               key={item.id}
               className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors"
