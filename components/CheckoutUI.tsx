@@ -7,12 +7,12 @@ import React, { useEffect, useState } from "react";
 const CheckoutUI = () => {
   const router = useRouter();
 
-  const [cart, setCart] = useState<IProduct[]>([]);
+  const [cart, setCart] = useState<IProduct[]>(() => {
+    if (typeof window === "undefined") return [];
 
-  useEffect(() => {
     const data = JSON.parse(localStorage.getItem("cart") || "null");
-    setCart(data?.products || []);
-  }, []);
+    return data?.products || [];
+  });
 
   const subtotal = cart.reduce((acc, item) => acc + (item.price || 0), 0);
   const shipping = 0.0; // Fixed free shipping based on your theme

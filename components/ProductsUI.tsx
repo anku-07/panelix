@@ -26,6 +26,7 @@ import { Label } from "./ui/label";
 import useProduct from "@/hooks/useProduct";
 import { getCurrentUser } from "@/utils/auth";
 import { TUser } from "@/typescript/common.types";
+import toast from "react-hot-toast";
 
 const ProductsUI = () => {
   const [user] = useState<TUser | null>(() => getCurrentUser());
@@ -170,7 +171,7 @@ const ProductsUI = () => {
                   products: [item],
                 };
               }
-
+              toast.success("Product added to cart");
               localStorage.setItem("cart", JSON.stringify(updatedCart));
             }}
           />
