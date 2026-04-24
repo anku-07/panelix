@@ -2,7 +2,7 @@ import { IProduct } from "@/typescript/interfaces/CustomAllInterface";
 import { ChevronLeft, CreditCard, ShieldCheck, Truck } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const CheckoutUI = () => {
   const router = useRouter();

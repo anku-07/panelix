@@ -114,11 +114,7 @@ const ProductsUI = () => {
                 </Button>
               </DrawerClose>
               <DrawerClose asChild>
-                <Button
-                  className="w-full"
-                  variant="outline"
-                  //   onClick={() => setTempCategories(selectedCategories)}
-                >
+                <Button className="w-full" variant="outline">
                   Cancel
                 </Button>
               </DrawerClose>
