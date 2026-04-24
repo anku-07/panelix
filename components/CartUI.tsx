@@ -30,11 +30,6 @@ function CartUI() {
     localStorage.setItem("cart", JSON.stringify({ products: updatedCartData }));
   };
 
-  // useEffect(() => {
-  //   const data = JSON.parse(localStorage.getItem("cart") || "null");
-  //   setCart(data?.products || []);
-  // }, []);
-
   if (!cart || cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center  space-y-4">
@@ -135,7 +130,10 @@ function CartUI() {
               </div>
             </div>
 
-            <button className="w-full py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]" onClick={() => router.push("/dashboard/checkout")}>
+            <button
+              className="w-full py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]"
+              onClick={() => router.push("/dashboard/checkout")}
+            >
               Checkout Now
             </button>
           </div>
