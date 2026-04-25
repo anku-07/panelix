@@ -30,7 +30,11 @@ import { TUser } from "@/typescript/common.types";
 import toast from "react-hot-toast";
 
 const ProductsUI = () => {
-  const [user] = useState<TUser | null>(() => getCurrentUser());
+  const [user, setUser] = useState<TUser | null>(null);
+  useEffect(() => {
+    setUser(getCurrentUser());
+  }, []);
+
   const router = useRouter();
   const [cartItems, setCartItems] = useState<number[]>([]);
 
