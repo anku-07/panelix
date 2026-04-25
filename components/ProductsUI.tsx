@@ -31,6 +31,7 @@ import toast from "react-hot-toast";
 
 const ProductsUI = () => {
   const [user, setUser] = useState<TUser | null>(null);
+
   useEffect(() => {
     setUser(getCurrentUser());
   }, []);

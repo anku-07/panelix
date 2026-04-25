@@ -28,7 +28,7 @@ function Dashboard() {
     }
   }, []);
 
-  console.log("users", users);
+  // console.log("users", users);
 
   return (
     <DashboardWrapper title="Dashboard">
