@@ -30,6 +30,35 @@ function CartUI() {
     localStorage.setItem("cart", JSON.stringify({ products: updatedCartData }));
   };
 
+  const quantityIncresedHandler = (id: number) => {
+    console.log("clicked id", id);
+
+    const updatedCart = cart.map((item) =>
+      item.id === id ? { ...item, quantity: item?.quantity + 1 } : item,
+    );
+
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify({ products: updatedCart }));
+    console.log("updatedCartd", updatedCart);
+  };
+
+  const quantityDecresedHandler = (id: number) => {
+    const updatedCart = cart
+      .map((item) => {
+        if (item.id !== id) return item;
+
+        // if quantity is 1 → remove item
+        if (item.quantity === 1) return null;
+
+        // otherwise decrease
+        return { ...item, quantity: item.quantity - 1 };
+      })
+      .filter(Boolean) as ICartItem[];
+
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify({ products: updatedCart }));
+  };
+
   if (!cart || cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center  space-y-4">
@@ -55,6 +84,8 @@ function CartUI() {
     0,
   );
 
+  console.log("cart data", cart);
+
   return (
     <div className="">
       <div className="flex items-center gap-2 mb-8 group cursor-pointer w-fit">
@@ -69,7 +100,7 @@ function CartUI() {
 
       <h1 className="text-4xl font-bold font-heading mb-8">Shopping Cart</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Products List */}
         <div className="lg:col-span-2 space-y-4">
           {cart.map((item: ICartItem) => (
@@ -94,7 +125,35 @@ function CartUI() {
                   {item.category}
                 </p>
                 <p className="mt-2 font-bold text-primary">${item.price}</p>
-                <p>Qty: {item?.quantity}</p>
+                <div className="flex items-center bg-muted/50 w-fit rounded-full py-2 px-3 border border-border shadow-sm mt-2">
+                  {/* Decrease Button */}
+                  <button
+                    className="flex h-6 w-6 items-center justify-center rounded-full text-foreground hover:bg-primary hover:text-primary-foreground transition-colors duration-200 active:scale-95 disabled:opacity-50"
+                    aria-label="Decrease quantity"
+                    onClick={() => quantityDecresedHandler(item.id)}
+                  >
+                    <span className="text-lg font-medium">−</span>
+                  </button>
+
+                  {/* Quantity Display */}
+                  <div className="px-4 min-w-[3rem] text-center">
+                    <p className="text-sm font-semibold text-foreground">
+                      <span className="text-muted-foreground font-normal mr-1">
+                        Qty:
+                      </span>
+                      {item?.quantity || 0}
+                    </p>
+                  </div>
+
+                  {/* Increase Button */}
+                  <button
+                    className="flex h-6 w-6 items-center justify-center rounded-full text-foreground hover:bg-primary hover:text-primary-foreground transition-colors duration-200 active:scale-95"
+                    aria-label="Increase quantity"
+                    onClick={() => quantityIncresedHandler(item.id)}
+                  >
+                    <span className="text-lg font-medium">+</span>
+                  </button>
+                </div>
               </div>
 
               <button

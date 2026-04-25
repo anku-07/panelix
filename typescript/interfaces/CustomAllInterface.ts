@@ -13,6 +13,7 @@ export interface IProductCardProps {
   badgeText?: string;
   className?: string;
   onAddtoCart?: () => void;
+  isInCart?: boolean;
 }
 
 export interface IProduct {

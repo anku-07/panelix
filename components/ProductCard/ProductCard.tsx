@@ -11,6 +11,7 @@ const ProductCard = ({
   imageUrl,
   onAddtoCart,
   badgeText,
+  isInCart,
 }: IProductCardProps) => {
   return (
     <div className="group relative w-full overflow-hidden rounded-[--radius] border border-border bg-card p-0 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
@@ -58,7 +59,7 @@ const ProductCard = ({
             onClick={() => onAddtoCart?.()}
           >
             {/* <ShoppingCart size={18} /> */}
-            Add to Cart
+            {isInCart ? "Go to Cart" : "Add to Cart"}
           </Button>
         </div>
       </div>

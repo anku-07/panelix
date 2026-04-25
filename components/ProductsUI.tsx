@@ -8,6 +8,7 @@ import {
   IProduct,
 } from "@/typescript/interfaces/CustomAllInterface";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import FilterIcon from "@/ui/icons/FilterIcon";
 import { Button } from "./ui/button";
 import {
@@ -30,6 +31,15 @@ import toast from "react-hot-toast";
 
 const ProductsUI = () => {
   const [user] = useState<TUser | null>(() => getCurrentUser());
+  const router = useRouter();
+  const [cartItems, setCartItems] = useState<number[]>([]);
+
+  useEffect(() => {
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "null");
+    if (existingCart?.products) {
+      setCartItems(existingCart.products.map((p: ICartItem) => p.id));
+    }
+  }, []);
 
   const { products, loading, error } = useProduct();
   const categoriesList = ["beauty", "fragrances", "furniture", "groceries"];
@@ -133,42 +143,32 @@ const ProductsUI = () => {
             title={item.title}
             description={item.description}
             price={item.price}
+            isInCart={cartItems.includes(item.id)}
             onAddtoCart={() => {
-              const existingCart = JSON.parse(
-                localStorage.getItem("cart") || "null",
-              );
+              const existingCart =
+                JSON.parse(localStorage.getItem("cart") || "null") || {};
+
+              if (cartItems.includes(item.id)) {
+                router.push("/dashboard/cart");
+                return;
+              }
 
               let updatedCart;
 
               if (existingCart.products) {
-                const productIndex = existingCart.products.findIndex(
-                  (p: ICartItem) => p.id === item.id,
-                );
-
-                if (productIndex > -1) {
-                  existingCart.products[productIndex].quantity += 1;
-
-                  updatedCart = {
-                    ...existingCart,
-                    products: existingCart.products,
-                  };
-                } else {
-                  updatedCart = {
-                    ...existingCart,
-                    products: [
-                      ...existingCart.products,
-                      { ...item, quantity: 1 },
-                    ],
-                  };
-                }
+                updatedCart = {
+                  ...existingCart,
+                  products: [...existingCart.products, { ...item, quantity: 1 }],
+                };
               } else {
                 updatedCart = {
                   id: user?.email,
-                  products: [item],
+                  products: [{ ...item, quantity: 1 }],
                 };
               }
               toast.success("Product added to cart");
               localStorage.setItem("cart", JSON.stringify(updatedCart));
+              setCartItems((prev) => [...prev, item.id]);
             }}
           />
         ))}
