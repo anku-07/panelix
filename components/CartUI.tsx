@@ -55,6 +55,8 @@ function CartUI() {
       })
       .filter(Boolean) as ICartItem[];
 
+      
+
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify({ products: updatedCart }));
   };
